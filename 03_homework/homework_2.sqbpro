@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/sitongye/Desktop/sql-main/05_sql/farmersmarket.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3615"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,18:maincustomer_purchases"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="booth" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="97"/><column index="3" value="300"/><column index="4" value="65"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="customer" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="70"/><column index="2" value="114"/><column index="3" value="112"/><column index="4" value="76"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="customer_purchases" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="63"/><column index="2" value="57"/><column index="3" value="71"/><column index="4" value="70"/><column index="5" value="51"/><column index="6" value="139"/><column index="7" value="93"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="product" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="63"/><column index="2" value="204"/><column index="3" value="80"/><column index="4" value="113"/><column index="5" value="97"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="product_category" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="113"/><column index="2" value="157"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="vendor" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="57"/><column index="2" value="171"/><column index="3" value="155"/><column index="4" value="136"/><column index="5" value="134"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">
+--SELECT * 
+--FROM customer
+
+--SELECT *
+--FROM customer
+--ORDER BY customer_last_name, customer_first_name
+--LIMIT 10;
+
+--SELECT *
+--FROM customer_purchases
+--WHERE product_id=4 AND 9
+
+--SELECT *,
+--    (quantity * cost_to_customer_per_qty) AS price
+--FROM  customer_purchases
+--WHERE vendor_id &gt;= 8 AND vendor_id &lt;= 10;
+
+--SELECT product_id,  product_name, 
+--CASE WHEN product_qty_type = 'unit' THEN 'unit' 
+--ELSE 'bulk' 
+--END AS prod_qty_type_condensed
+--FROM product
+
+--SELECT product_name, 
+--CASE WHEN product_name  LIKE '%Pepper%' THEN '1' 
+--ELSE '0' 
+--END AS pepper_flag
+--FROM product
+
+SELECT 
+    v.*,
+    vba.*
+FROM 
+    vendor v
+INNER JOIN 
+    vendor_booth_assignments vba
+ON 
+    v.vendor_id = vba.vendor_id
+ORDER BY 
+    v.vendor_name, 
+    vba.market_date;
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
