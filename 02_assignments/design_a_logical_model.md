@@ -15,7 +15,57 @@ _Hint, search type 1 vs type 2 slowly changing dimensions._
 
 Bonus: Are there privacy implications to this, why or why not?
 ```
-Your answer...
+1.Overwrite Existing Address (Type 1)
+
+When create a new customer:
+
+CREATE TABLE CUSTOMER_ADDRESS (
+    CustomerID INT PRIMARY KEY,
+    Street VARCHAR(100),
+    City VARCHAR(50),
+    Province VARCHAR(50),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(50)
+);
+
+When needs to update to new address:
+
+UPDATE CUSTOMER_ADDRESS
+SET Street = 'New Street',
+    City = 'New City',
+    Province = 'New Province',
+    PostalCode = 'New PostalCode',
+    Country = 'New Country'
+WHERE CustomerID = 1;
+
+2. Retain Previous Address as History (Type 2)
+
+When create a new customer, adds date range:
+
+CREATE TABLE CUSTOMER_ADDRESS (
+    AddressID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerID INT,
+    Street VARCHAR(100),
+    City VARCHAR(50),
+    Province VARCHAR(50),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(50),
+    StartDate DATE,
+    EndDate DATE
+);
+
+When needs to update to new address:
+
+UPDATE CUSTOMER_ADDRESS
+SET EndDate = '2024-05-01'
+WHERE CustomerID = 1 AND EndDate IS NULL;
+
+-- Insert the new address
+INSERT INTO CUSTOMER_ADDRESS (CustomerID, Street, City, Province, PostalCode, Country, StartDate, EndDate)
+VALUES (1, 'New Street', 'New City', 'New Province', 'New PostalCode', 'New Country', '2024-05-02', NULL);
+
+The second method would potentially face more risk to privacy implication due to all previous address are stored.
+
 ```
 
 ## Question 4
@@ -23,7 +73,9 @@ Review the AdventureWorks Schema [here](https://i.stack.imgur.com/LMu4W.gif)
 
 Highlight at least two differences between it and your ERD. Would you change anything in yours?
 ```
-Your answer...
+1. There are more sub tables in the provided example such as emails, contact type etc. Mine has larger tables that include everything.
+
+2. The example is very detailed and also has the production section, which mine did not consider. 
 ```
 
 # Criteria
